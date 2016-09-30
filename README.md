@@ -13,7 +13,7 @@ _A wildlife tracking application that records sightings of both endangered and n
 _Clone the repo and open it up.
 In PSQL:
 CREATE DATABASE wildlife_tracker;
-CREATE TABLE animals (id serial PRIMARY KEY, name varchar, health int, age int);
+CREATE TABLE animals (id serial PRIMARY KEY, name varchar, health int, age int, type varchar);
 CREATE TABLE sightings (id serial PRIMARY KEY, location varchar, rangerName varchar, animalId int);
 CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;
 _
