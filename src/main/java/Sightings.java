@@ -5,11 +5,13 @@ public class Sightings {
   int id;
   String location;
   String rangerName;
+  Timestamp created;
   int animalId;
 
-  public Sightings(String location, String rangerName, int animalId) {
+  public Sightings(String location, String rangerName, Timestamp created, int animalId) {
     this.location = location;
     this.rangerName = rangerName;
+    this.created = created
     this.animalId = animalId;
   }
 
@@ -19,6 +21,10 @@ public class Sightings {
 
   public int getRangerName() {
     return rangerName;
+  }
+
+  public Timestamp getCreated() {
+    return created;
   }
 
   public int getAnimalId() {
@@ -31,7 +37,7 @@ public class Sightings {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (location, rangerName, animalId) VALUES (:location, :rangerName, :animalId)";
+      String sql = "INSERT INTO sightings (location, rangerName, created, animalId) VALUES (:location, :rangerName, now() :animalId)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("location", this.location)
         .addParameter("rangerName", this.rangerName)
