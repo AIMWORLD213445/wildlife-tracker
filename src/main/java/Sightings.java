@@ -1,5 +1,7 @@
 import org.sql2o.*;
 import java.util.List;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class Sightings {
   int id;
@@ -8,10 +10,9 @@ public class Sightings {
   Timestamp created;
   int animalId;
 
-  public Sightings(String location, String rangerName, Timestamp created, int animalId) {
+  public Sightings(String location, String rangerName, int animalId) {
     this.location = location;
     this.rangerName = rangerName;
-    this.created = created
     this.animalId = animalId;
   }
 
