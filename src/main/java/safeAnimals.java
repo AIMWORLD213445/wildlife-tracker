@@ -15,6 +15,7 @@ public static final String DATABASE_TYPE = "SafeAnimals";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("type", this.type)
+        .throwOnMappingFailure(false)
         .executeUpdate()
         .getKey();
     }
@@ -35,6 +36,7 @@ public static final String DATABASE_TYPE = "SafeAnimals";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql)
         .addParameter("type", DATABASE_TYPE)
+        .throwOnMappingFailure(false)
         .executeAndFetch(SafeAnimals.class);
     }
   }
@@ -44,21 +46,9 @@ public static final String DATABASE_TYPE = "SafeAnimals";
       String sql = "SELECT * FROM animals WHERE id = :id";
       SafeAnimals safeAnimal = con.createQuery(sql)
         .addParameter("id", id)
+        .throwOnMappingFailure(false)
         .executeAndFetchFirst(SafeAnimals.class);
       return safeAnimal;
-    }
-  }
-
-  public static List<SafeAnimals> searchBySightings(String search) {
-    String sql = "SELECT animals.* FROM animals " +
-      "LEFT JOIN sightings_animals ON animals.Id = sightings_animals.animals_Id " +
-      "LEFT JOIN sightings ON sightings_animals.sightings_id = sightings.id " +
-      "WHERE animals.type = :type AND sightings.location ~* :search";
-    try(Connection con = DB.sql2o.open()) {
-      return con.createQuery(sql)
-        .addParameter("search", ".*" + search + ".*")
-        .addParameter("type", DATABASE_TYPE)
-        .executeAndFetch(SafeAnimals.class);
     }
   }
 }

@@ -8,14 +8,14 @@ public class EndangeredAnimalsTest {
   @Before
   public void setUp() {
      DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/wildlife_tracker_test", null, null);
-     endangeredAnimal = new EndangeredAnimals ("fox", 1, 3);
+     endangeredAnimal = new EndangeredAnimals ("fox", 3, 1);
   }
 
   @After
   public void tearDown() {
    try(Connection con = DB.sql2o.open()) {
      String deleteSightingsQuery = "DELETE FROM sightings *;";
-     String deletesAnimalsQuery = "DELETE FROM animals *;";
+     String deleteAnimalsQuery = "DELETE FROM animals *;";
      con.createQuery(deleteSightingsQuery).executeUpdate();
      con.createQuery(deleteAnimalsQuery).executeUpdate();
     }
@@ -23,22 +23,22 @@ public class EndangeredAnimalsTest {
 
   @Test
   public void endangeredAnimal_instantiatesCorrectly_true() {
-    assertTrue(endangeredAnimal instanceof EndageredAnimals);
+    assertTrue(endangeredAnimal instanceof EndangeredAnimals);
   }
 
   @Test
   public void getName_instantiatesWithName_String() {
-    assertEquals("fox", endangeredAnimals.getName());
+    assertEquals("fox", endangeredAnimal.getName());
   }
 
   @Test
   public void getHealth_instantiatesWithHealth_int() {
-    assertEquals("1", endangeredAnimals.getHealth());
+    assertEquals(3, endangeredAnimal.getHealth());
   }
 
   @Test
   public void getAge_instantiatesWithAge_String() {
-    assertEquals("3", endangeredAnimals.getAge());
+    assertEquals(1, endangeredAnimal.getAge());
   }
 
   @Test
@@ -56,10 +56,10 @@ public class EndangeredAnimalsTest {
   @Test
   public void all_returnsAllEndangeredAnimals_true () {
    endangeredAnimal.save();
-   EndangeredAnimals endangeredAnimalTwo = new EndangeredAnimal("eagle", 2, 2);
+   EndangeredAnimals endangeredAnimalTwo = new EndangeredAnimals("eagle", 2, 2);
    endangeredAnimalTwo.save();
    assertEquals(true, EndangeredAnimals.all().get(0).equals(endangeredAnimal));
-   assertEquals(true, EndangeredAnimals.all().get(1).equals(endangeredAnimalsTwo));
+   assertEquals(true, EndangeredAnimals.all().get(1).equals(endangeredAnimalTwo));
  }
 
  @Test
@@ -68,16 +68,5 @@ public class EndangeredAnimalsTest {
    endangeredAnimal.save();
    EndangeredAnimals savedEndangeredAnimal = EndangeredAnimals.find(endangeredAnimal.getId());
    assertEquals(true, endangeredAnimal.equals(savedEndangeredAnimal));
- }
-
- @Test
- public void searchBySighting_returnsAllAnimalsWithSightings_true () {
-   EndangeredAnimals endangeredAnimal = new EndangeredAnimals("eagle", 2, 2);
-   endangeredAnimal.save();
-   Sightings sighting = new Sightings("NE Quadrant", "Bob", 1);
-   sighting.save();
-   endangeredAnimal.addSighting(sighting);
-   List<EndangeredAnimals> foundEndangeredAnimal = EndangeredAnimals.searchBySighting("NE Quadrant", "Bob", 1 );
-   assertEquals(true, foundEndangeredAnimal.contains(endangeredAnimal));
  }
 }

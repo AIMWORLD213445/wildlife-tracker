@@ -12,7 +12,7 @@ public abstract class Animals {
   }
 
   public int getId() {
-    return this.id
+    return this.id;
   }
 
   public void delete() {

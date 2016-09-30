@@ -15,7 +15,7 @@ public class SafeAnimalsTest {
   public void tearDown() {
    try(Connection con = DB.sql2o.open()) {
      String deleteSightingsQuery = "DELETE FROM sightings *;";
-     String deletesAnimalsQuery = "DELETE FROM animals *;";
+     String deleteAnimalsQuery = "DELETE FROM animals *;";
      con.createQuery(deleteSightingsQuery).executeUpdate();
      con.createQuery(deleteAnimalsQuery).executeUpdate();
     }
@@ -28,7 +28,7 @@ public class SafeAnimalsTest {
 
   @Test
   public void getName_instantiatesWithName_String() {
-    assertEquals("owl", safeAnimals.getName());
+    assertEquals("owl", safeAnimal.getName());
   }
 
   @Test
@@ -46,10 +46,10 @@ public class SafeAnimalsTest {
   @Test
   public void all_returnsAllSafeAnimals_true () {
    safeAnimal.save();
-   SafeAnimals safeAnimalTwo = new SafeAnimal("bear");
+   SafeAnimals safeAnimalTwo = new SafeAnimals("bear");
    safeAnimalTwo.save();
    assertEquals(true, SafeAnimals.all().get(0).equals(safeAnimal));
-   assertEquals(true, SafeAnimals.all().get(1).equals(safeAnimalsTwo));
+   assertEquals(true, SafeAnimals.all().get(1).equals(safeAnimalTwo));
  }
 
  @Test
@@ -58,16 +58,5 @@ public class SafeAnimalsTest {
    safeAnimal.save();
    SafeAnimals savedSafeAnimal = SafeAnimals.find(safeAnimal.getId());
    assertEquals(true, safeAnimal.equals(savedSafeAnimal));
- }
-
- @Test
- public void searchBySighting_returnsAllAnimalsWithSightings_true () {
-   SafeAnimals safeAnimal = new SafeAnimals("hawk");
-   safeAnimal.save();
-   Sightings sighting = new Sightings("NE Quadrant", "Bob", 1);
-   sighting.save();
-   safeAnimal.addSighting(sighting);
-   List<SafeAnimals> foundSafeAnimal = SafeAnimals.searchBySighting("NE Quadrant", "Bob", 1 );
-   assertEquals(true, foundSafeAnimal.contains(safeAnimal));
  }
 }

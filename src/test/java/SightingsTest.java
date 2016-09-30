@@ -17,7 +17,7 @@ public class SightingsTest {
   public void tearDown() {
    try(Connection con = DB.sql2o.open()) {
      String deleteSightingsQuery = "DELETE FROM sightings *;";
-     String deletesAnimalsQuery = "DELETE FROM animals *;";
+     String deleteAnimalsQuery = "DELETE FROM animals *;";
      con.createQuery(deleteSightingsQuery).executeUpdate();
      con.createQuery(deleteAnimalsQuery).executeUpdate();
     }
@@ -40,7 +40,7 @@ public class SightingsTest {
 
   @Test
   public void getAnimalsId_instantiatesWithAnimalsId_int() {
-    assertEquals(1, sighting.getAnimalsId());
+    assertEquals(1, sighting.getAnimalId());
   }
 
   @Test
@@ -80,17 +80,17 @@ public class SightingsTest {
 
   @Test
   public void save_savesAnimalsIdIntoDB_true() {
-    Animals animal = new Animals("Owl");
+    SafeAnimals animal = new SafeAnimals("Owl");
     animal.save();
     Sightings sighting = new Sightings("NE Quadrant", "Bob", animal.getId());
     sighting.save();
     Sightings savedSighting = Sightings.find(sighting.getId());
-    assertEquals(savedCSighting.getAnimalsId(), animal.getId());
+    assertEquals(savedSighting.getAnimalId(), animal.getId());
   }
 
   @Test
   public void save_recordsTimeOfCreationInDatabase() {
-    Sightings sighting = new Sighting("NW Quadrant", "John", 1);
+    Sightings sighting = new Sightings("NW Quadrant", "John", 1);
     sighting.save();
     Timestamp savedSighting= Sightings.find(sighting.getId()).getCreated();
     Timestamp now = new Timestamp(new Date().getTime());
@@ -102,7 +102,7 @@ public class SightingsTest {
     sighting.save();
     Sightings secondSighting = new Sightings("NW Quadrant", "John", 1);
     secondSighting.save();
-    assertEquals(Sighting.find(secondSighting.getId()), secondSighting);
+    assertEquals(Sightings.find(secondSighting.getId()), secondSighting);
   }
 
   @Test
@@ -111,7 +111,7 @@ public class SightingsTest {
     sighting.save();
     int sightingId = sighting.getId();
     sighting.delete();
-    assertEquals(null, Sighting.find(sightingId));
+    assertEquals(null, Sightings.find(sightingId));
   }
 
   @Test
@@ -120,6 +120,6 @@ public class SightingsTest {
     sighting.update("SW Quadrant","Jill", 2);
     assertEquals("SW Quadrant", Sightings.find(sighting.getId()).getLocation());
     assertEquals("Jill", Sightings.find(sighting.getId()).getRangerName());
-    assertEquals(2 ,Sightings.find(sighting.getId()).getAnimalsId());
+    assertEquals(2 ,Sightings.find(sighting.getId()).getAnimalId());
   }
 }

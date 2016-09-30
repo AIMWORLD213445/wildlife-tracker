@@ -20,7 +20,7 @@ public class Sightings {
     return location;
   }
 
-  public int getRangerName() {
+  public String getRangerName() {
     return rangerName;
   }
 
@@ -29,7 +29,7 @@ public class Sightings {
   }
 
   public int getAnimalId() {
-    return stylistId;
+    return animalId;
   }
 
   public int getId() {
@@ -38,7 +38,7 @@ public class Sightings {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (location, rangerName, created, animalId) VALUES (:location, :rangerName, now() :animalId)";
+      String sql = "INSERT INTO sightings (location, rangerName, created, animalId) VALUES (:location, :rangerName, now(), :animalId)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("location", this.location)
         .addParameter("rangerName", this.rangerName)
@@ -48,7 +48,7 @@ public class Sightings {
     }
   }
 
-  public void update() {
+  public void update(String location, String rangerName, int animalId) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE sightings SET location = :location, rangerName = :rangerName, animalId = :animalId WHERE id = :id";
       con.createQuery(sql)
@@ -64,6 +64,7 @@ public class Sightings {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM sightings";
       return con.createQuery(sql)
+      .throwOnMappingFailure(false)
       .executeAndFetch(Sightings.class);
     }
   }
