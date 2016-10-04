@@ -48,6 +48,8 @@ public class App {
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
+//if else statement to do all animals in one page?
+
    post("/sightings/endangered", (request, response) -> {
      Map<String, Object> model = new HashMap<String, Object>();
      EndangeredAnimals animals = EndangeredAnimals.find(Integer.parseInt(request.params("id")));
