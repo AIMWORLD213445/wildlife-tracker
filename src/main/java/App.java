@@ -45,6 +45,7 @@ public class App {
    }, new VelocityTemplateEngine());
 
 //if else statement to do all animals in one page?
+//add saves needed to save to DB
 
    post("/sightings", (request, response) -> {
      Map<String, Object> model = new HashMap<String, Object>();

@@ -1,9 +1,21 @@
-#if($animals)
-  <h1>Added $animals.getName()</h1>
+#if($safeAnimals)
+  <h1>Added $safeAnimals.getName()</h1>
+#else
+  <h1>Add Safe Animal</h1>
+#end
+#if($safeAnimals)
+  #foreach($safeAnimals in $animals)
+    <h3>$animals.getName()</h3>
+    <h3>$endangeredAnimals.getHealth()</h3>
+    <h3>$endangeredAnimals.getAge()</h3>
+  #end
+#end
+#if($endangeredAnimals)
+  <h1>Added $safeAnimals.getName()</h1>
 #else
   <h1>Add Animal</h1>
 #end
-#if($animals)
+#if($safeAnimals)
   #foreach($safeAnimals in $animals)
     <h3>$animals.getName()</h3>
     <h3>$endangeredAnimals.getHealth()</h3>
@@ -15,7 +27,7 @@
   <div class="col-sm-4">
   <form action='/animals' method="post">
     <div class="form-group">
-      <label for="safeAnimals"> Safe Animal Name: </label>
+      <label for="safeAnimals"> Add a Safe Animal: </label>
       <input id="name" name="name" class="form-control" type="text">
     </div>
     <div class="form-group">
