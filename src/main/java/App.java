@@ -3,6 +3,7 @@ import java.util.Map;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
+import java.util.List;
 
 public class App {
   public static void main(String[] args) {
@@ -47,15 +48,22 @@ public class App {
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
-   post("/sightings", (request, response) -> {
+   post("/sightings/endangered", (request, response) -> {
      Map<String, Object> model = new HashMap<String, Object>();
-     EndangeredAnimals animal = new EndangeredAnimals(endangeredAnimalName, endangeredAnimalHealth, endangeredAnimalAge);
-     SafeAnimals animal = new SafeAnimals(safeAnimalName);
+     EndangeredAnimals animals = EndangeredAnimals.find(Integer.parseInt(request.params("id")));
      String sightingsLocation = request.queryParams("location");
      String rangerName = request.queryParams("name");
-     Sightings newSighting = new Sightings(sightingsLocation, rangerName, animal.getId);
-     newSighting.save();
-     model.put("sightings", Sightings.all());
+     model.put("animals", animals.getAllSightings());
+     model.put("template", "templates/sightings.vtl");
+     return new ModelAndView(model, layout);
+   }, new VelocityTemplateEngine());
+
+   post("/sightings/safe", (request, response) -> {
+     Map<String, Object> model = new HashMap<String, Object>();
+     SafeAnimals animals = SafeAnimals.find(Integer.parseInt(request.params("id")));
+     String sightingsLocation = request.queryParams("location");
+     String rangerName = request.queryParams("name");
+     model.put("animals", animals.getAllSightings());
      model.put("template", "templates/sightings.vtl");
      return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
