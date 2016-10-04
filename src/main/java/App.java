@@ -30,11 +30,7 @@ public class App {
       String endangeredAnimalName = request.queryParams("name");
       int endangeredAnimalHealth = Integer.parseInt(request.queryParams("health"));
       int endangeredAnimalAge = Integer.parseInt (request.queryParams("age"));
-      EndangeredAnimals newEndangeredAnimal = new EndangeredAnimals(endangeredAnimalName, endangeredAnimalHealth, endangeredAnimalAge);
-      newEndangeredAnimal.save();
       String safeAnimalName = request.queryParams("name");
-      SafeAnimals newSafeAnimal = new SafeAnimals(safeAnimalName);
-      newSafeAnimal.save();
       model.put("endangeredAnimals", EndangeredAnimals.all());
       model.put("safeAnimals", SafeAnimals.all());
       model.put("template", "templates/animals.vtl");
@@ -50,19 +46,9 @@ public class App {
 
 //if else statement to do all animals in one page?
 
-   post("/sightings/endangered", (request, response) -> {
+   post("/sightings", (request, response) -> {
      Map<String, Object> model = new HashMap<String, Object>();
      EndangeredAnimals animals = EndangeredAnimals.find(Integer.parseInt(request.params("id")));
-     String sightingsLocation = request.queryParams("location");
-     String rangerName = request.queryParams("name");
-     model.put("animals", animals.getAllSightings());
-     model.put("template", "templates/sightings.vtl");
-     return new ModelAndView(model, layout);
-   }, new VelocityTemplateEngine());
-
-   post("/sightings/safe", (request, response) -> {
-     Map<String, Object> model = new HashMap<String, Object>();
-     SafeAnimals animals = SafeAnimals.find(Integer.parseInt(request.params("id")));
      String sightingsLocation = request.queryParams("location");
      String rangerName = request.queryParams("name");
      model.put("animals", animals.getAllSightings());

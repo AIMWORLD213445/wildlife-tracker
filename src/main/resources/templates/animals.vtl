@@ -1,13 +1,13 @@
 #if($animals)
-  <h1>Added $animal.getName()</h1>
+  <h1>Added $animals.getName()</h1>
 #else
   <h1>Add Animal</h1>
 #end
 #if($animals)
-  #foreach($animal in $animals)
-    <h3>$sighting.getName()</h3>
-    <h3>$endangeredAnimal.getHealth()</h3>
-    <h3>$endangeredAnimal.getAge()</h3>
+  #foreach($safeAnimals in $animals)
+    <h3>$animals.getName()</h3>
+    <h3>$endangeredAnimals.getHealth()</h3>
+    <h3>$endangeredAnimals.getAge()</h3>
   #end
 #end
 <div class="row">
@@ -15,15 +15,19 @@
   <div class="col-sm-4">
   <form action='/animals' method="post">
     <div class="form-group">
-      <label for="name">Animal Name: </label>
+      <label for="safeAnimals"> Safe Animal Name: </label>
       <input id="name" name="name" class="form-control" type="text">
     </div>
     <div class="form-group">
-      <label for="health">Animal Health: </label>
+      <label for="endangeredAnimals"> Endangered Animal Name: </label>
+      <input id="name" name="name" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+      <label for="endangeredAnimals">Endangered Animal Health: </label>
       <input id="health" name="health" class="form-control" type="text">
     </div>
     <div class="form-group">
-      <label for="age">Animal Age: </label>
+      <label for="endangeredAnimals">Endangered Animal Age: </label>
       <input id="age" name="age" class="form-control" type="text">
     </div>
     <button type='submit' class='btn'>Submit Animal</button>
