@@ -1,5 +1,5 @@
 #foreach($safeAnimal in $animals)
-  <h3>$animals.getName()</h3>
+  <h3>$safeAnimal.getName()</h3>
 #end
 #end
 #foreach($endangeredAnimal in $animals)
@@ -7,33 +7,29 @@
   <h3>$endangeredAnimal.getHealth()</h3>
   <h3>$endangeredAnimal.getAge()</h3>
 #end
-#if($safeAnimals)
-  #foreach($safeAnimals in $animals)
-    <h3>$animals.getName()</h3>
-    <h3>$endangeredAnimals.getHealth()</h3>
-    <h3>$endangeredAnimals.getAge()</h3>
-  #end
-#end
 <div class="row">
   <div class="col-sm-4"></div>
   <div class="col-sm-4">
-  <form action='/animals' method="post">
+  <form action='/animals/safe' method="post">
     <div class="form-group">
-      <label for="safeAnimals"> Add a Safe Animal: </label>
+      <label for="safeAnimal"> Add a Safe Animal: </label>
       <input id="name" name="name" class="form-control" type="text">
     </div>
+    <button type='submit' class='btn'>Submit Endangered Animal</button>
+  </form>
+  <form action='/animals/endangered' method="post">
+  <div class="form-group">
+    <label for="endangeredAnimal"> Endangered Animal Name: </label>
+    <input id="name" name="name" class="form-control" type="text">
+  </div>
     <div class="form-group">
-      <label for="endangeredAnimals"> Endangered Animal Name: </label>
-      <input id="name" name="name" class="form-control" type="text">
-    </div>
-    <div class="form-group">
-      <label for="endangeredAnimals">Endangered Animal Health: </label>
+      <label for="endangeredAnimal">Endangered Animal Health: </label>
       <input id="health" name="health" class="form-control" type="text">
     </div>
     <div class="form-group">
-      <label for="endangeredAnimals">Endangered Animal Age: </label>
+      <label for="endangeredAnimal">Endangered Animal Age: </label>
       <input id="age" name="age" class="form-control" type="text">
     </div>
-    <button type='submit' class='btn'>Submit Animal</button>
+    <button type='submit' class='btn'>Submit Endangered Animal</button>
   </form>
 </div>

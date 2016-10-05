@@ -1,15 +1,10 @@
-#if($sighting)
-  <h1>Added $sighting.getAnimalId()</h1>
-#else
-  <h1>Add Sighting</h1>
-#end
-#if($sightings)
-  #foreach($sighting in $sightings)
-    <h3>$sighting.getLocation()</h3>
-    <h3>$sighting.getRangerName()</h3>
-    <h3>$sighting.getCreated()</h3>
-    <h3>$sighting.getAnimalId</h3>
-  #end
+
+#foreach($sighting in $sightings)
+  <h3>$sighting.getLocation()</h3>
+  <h3>$sighting.getRangerName()</h3>
+  <h3>$sighting.getCreated()</h3>
+  <h3>$sighting.getAnimalId</h3>
+  <h3>Animal.find(sighting.getAnimalId())<h3>
 #end
 <div class="row">
   <div class="col-sm-4"></div>
@@ -23,7 +18,6 @@
       <label for="name">Sighting Ranger Name: </label>
       <input id="name" name="name" class="form-control" type="text">
     </div>
-
     <button type='submit' class='btn'>Submit Sighting</button>
   </form>
 </div>
