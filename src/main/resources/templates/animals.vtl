@@ -1,8 +1,7 @@
-#foreach($safeAnimal in $animals)
+#foreach($safeAnimal in $Animals)
   <h3>$safeAnimal.getName()</h3>
 #end
-#end
-#foreach($endangeredAnimal in $animals)
+#foreach($endangeredAnimal in $Animals)
   <h1>$endangeredAnimal.getName()</h1>
   <h3>$endangeredAnimal.getHealth()</h3>
   <h3>$endangeredAnimal.getAge()</h3>
@@ -10,14 +9,14 @@
 <div class="row">
   <div class="col-sm-4"></div>
   <div class="col-sm-4">
-  <form action='/animals/safe' method="post">
+  <form action='/animals' method="post">
     <div class="form-group">
       <label for="safeAnimal"> Add a Safe Animal: </label>
       <input id="name" name="name" class="form-control" type="text">
     </div>
-    <button type='submit' class='btn'>Submit Endangered Animal</button>
+    <button type='submit' class='btn'>Submit Safe Animal</button>
   </form>
-  <form action='/animals/endangered' method="post">
+  <form action='/animals' method="post">
   <div class="form-group">
     <label for="endangeredAnimal"> Endangered Animal Name: </label>
     <input id="name" name="name" class="form-control" type="text">
