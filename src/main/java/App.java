@@ -19,7 +19,7 @@ public class App {
 
     get("/animals", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("safeAnimals", SafeAnimals.all());
+      model.put("safeAnimal", SafeAnimals.all());
       model.put("endangeredAnimal", EndangeredAnimals.all());
       model.put("template", "templates/animals.vtl");
       return new ModelAndView(model, layout);
@@ -31,8 +31,8 @@ public class App {
       int endangeredAnimalHealth = Integer.parseInt(request.queryParams("health"));
       int endangeredAnimalAge = Integer.parseInt (request.queryParams("age"));
       EndangeredAnimals endangeredAnimal  = new EndangeredAnimals(endangeredAnimalName, endangeredAnimalHealth, endangeredAnimalAge);
-      endangeredAnimal.save();
-      model.put("endangeredAnimals", EndangeredAnimals.all());
+      EndangeredAnimals.save();
+      model.put("endangeredAnimal", EndangeredAnimals.all());
       model.put("template", "templates/animals/endangered.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -41,18 +41,18 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       String safeAnimalName = request.queryParams("name");
       SafeAnimals safeAnimal  = new SafeAnimals(safeAnimalName);
-      safeAnimal.save();
-      model.put("safeAnimals", SafeAnimals.all());
+      SafeAnimals.save();
+      model.put("safeAnimal", SafeAnimals.all());
       model.put("template", "templates/animals/safe.vtl");
       return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
+   }, new VelocityTemplateEngine());
 
     get("/sightings", (request, response) -> {
-     Map<String, Object> model = new HashMap<String, Object>();
-     model.put("sightings", Sightings.all());
-     model.put("template", "templates/sightings.vtl");
-     return new ModelAndView(model, layout);
-   }, new VelocityTemplateEngine());
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("sightings", Sightings.all());
+      model.put("template", "templates/sightings.vtl");
+      return new ModelAndView(model, layout);
+  },  new VelocityTemplateEngine());
 
 //if else statement to do all animals in one page?
 //add saves needed to save to DB
