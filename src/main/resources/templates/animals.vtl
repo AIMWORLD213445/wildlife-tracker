@@ -1,19 +1,11 @@
-#if($safeAnimals)
-  <h1>Added $safeAnimals.getName()</h1>
-#else
-  <h1>Add Safe Animal</h1>
+#foreach($safeAnimal in $animals)
+  <h3>$animals.getName()</h3>
 #end
-#if($safeAnimals)
-  #foreach($safeAnimals in $animals)
-    <h3>$animals.getName()</h3>
-    <h3>$endangeredAnimals.getHealth()</h3>
-    <h3>$endangeredAnimals.getAge()</h3>
-  #end
 #end
-#if($endangeredAnimals)
-  <h1>Added $safeAnimals.getName()</h1>
-#else
-  <h1>Add Animal</h1>
+#foreach($endangeredAnimal in $animals)
+  <h1>$endangeredAnimal.getName()</h1>
+  <h3>$endangeredAnimal.getHealth()</h3>
+  <h3>$endangeredAnimal.getAge()</h3>
 #end
 #if($safeAnimals)
   #foreach($safeAnimals in $animals)
