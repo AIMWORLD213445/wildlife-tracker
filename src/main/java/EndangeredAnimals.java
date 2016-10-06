@@ -2,28 +2,28 @@ import org.sql2o.*;
 import java.util.List;
 
 public class EndangeredAnimals extends Animals {
-  private int health;
-  private int age;
+  private Integer health;
+  private Integer age;
   public static final String DATABASE_TYPE = "EndangeredAnimals";
-  public final static int GOOD_HEALTH = 1;
-  public final static int OK_HEALTH = 2;
-  public final static int ILL_HEALTH = 3;
-  public final static int ADULT_AGE = 3;
-  public final static int YOUNG_AGE = 2;
-  public final static int NEWBORN_AGE = 1;
+  public final static Integer GOOD_HEALTH = 1;
+  public final static Integer OK_HEALTH = 2;
+  public final static Integer ILL_HEALTH = 3;
+  public final static Integer ADULT_AGE = 3;
+  public final static Integer YOUNG_AGE = 2;
+  public final static Integer NEWBORN_AGE = 1;
 
-  public EndangeredAnimals (String name, int health, int age) {
+  public EndangeredAnimals (String name, Integer health, Integer age) {
     this.name = name;
     this.health = health;
     this.age = age;
     type = DATABASE_TYPE;
   }
 
-  public int getHealth() {
+  public Integer getHealth() {
   return this.health;
   }
 
-  public int getAge() {
+  public Integer getAge() {
   return this.age;
   }
 

@@ -24,10 +24,10 @@
     </div>
     <button type='submit' class='btn'>Submit Endangered Animal</button>
   </form>
-  #foreach($safeAnimal in $animals)
+  #foreach($animals in $safeAnimal)
     <h3>$safeAnimal.getName()</h3>
   #end
-  #foreach($endangeredAnimal in $animals)
+  #foreach($animals in $endangeredAnimal)
     <h1>$endangeredAnimal.getName()</h1>
     <h3>$endangeredAnimal.getHealth()</h3>
     <h3>$endangeredAnimal.getAge()</h3>
