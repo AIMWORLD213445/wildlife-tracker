@@ -25,25 +25,25 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/animals/endangered", (request, response) -> {
+    post("/animals", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String endangeredAnimalName = request.queryParams("name");
       int endangeredAnimalHealth = Integer.parseInt(request.queryParams("health"));
       int endangeredAnimalAge = Integer.parseInt(request.queryParams("age"));
-      EndangeredAnimals endangeredAnimal  = new EndangeredAnimals(endangeredAnimalName, endangeredAnimalHealth, endangeredAnimalAge);
+      EndangeredAnimals endangeredAnimal = new EndangeredAnimals(endangeredAnimalName, endangeredAnimalHealth, endangeredAnimalAge);
       endangeredAnimal.save();
       model.put("endangeredAnimal", EndangeredAnimals.all());
-      model.put("template", "templates/animals/endangered.vtl");
+      model.put("template", "templates/animals.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/animals/safe", (request, response) -> {
+    post("/animals", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String safeAnimalName = request.queryParams("name");
       SafeAnimals safeAnimal  = new SafeAnimals(safeAnimalName);
       safeAnimal.save();
       model.put("safeAnimal", SafeAnimals.all());
-      model.put("template", "templates/animals/safe.vtl");
+      model.put("template", "templates/animals.vtl");
       return new ModelAndView(model, layout);
    }, new VelocityTemplateEngine());
 
